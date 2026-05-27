@@ -12,7 +12,7 @@ public class BossStateMover : BossBaseState
 
     }
 
-    public override void OnCollisionEnter(BossStateManager boss){
+    public override void OnCollisionEnter(BossStateManager boss, Collision collision){
 
     }
 }

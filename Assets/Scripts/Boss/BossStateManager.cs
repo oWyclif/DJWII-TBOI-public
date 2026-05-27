@@ -44,6 +44,13 @@ public class BossStateManager : MonoBehaviour
         // states todo frame
         currentState.UpdateState(this);
     }
+    
+    //Estamos trazendo o OnCollisionEnter da Unity para cá, e lançando para nossos
+    // states. Cada um deles tem um comportamento na colisão, apresentado na 
+    // função "public override void OnColissionEnter(BossStateManager boss)"
+    void OnCollisionEnter(Collision collision){
+        currentState.OnCollisionEnter(this, collision);
+    }
 
     public void SwitchState(BossBaseState state){
         // Aqui, a Unity espera um state (BossBaseState state)
