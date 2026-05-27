@@ -9,7 +9,7 @@ public class BossStateIdle : BossBaseState
     }
 
     public override void UpdateState(BossStateManager boss){
-
+        Debug.Log("Agora todo frame o Boss fala");
     }
 
     public override void OnCollisionEnter(BossStateManager boss){
