@@ -23,4 +23,5 @@ public class BossStateManager : MonoBehaviour
     {
         
     }
+    // O commit anterior duplicou lol
 }
