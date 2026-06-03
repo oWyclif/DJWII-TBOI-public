@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class BossStateMover : BossBaseState
 {
-    GameObject p  = new GameObject(); 
+    Transform bossTransform;
+    float bossSpeed = 0.003f;
 
-    Transform pTransform;
+
+    GameObject player; 
+    Transform playerTransform;
     
     public override void EnterState(BossStateManager boss){
         Debug.Log("Boss Movendo");
 
-        p = GameObject.Find("player"); //Aqui encontramos o Objeto player
-        pTransform = p.GetComponent<Transform>(); // E definimos o ptransform,
+        player = GameObject.Find("player"); //Aqui encontramos o Objeto player
+        playerTransform = player.GetComponent<Transform>(); // E definimos o playertransform,
         // a posição do player
+
+        bossTransform = GameObject.Find("boss").GetComponent<Transform>();
     }
 
     public override void UpdateState(BossStateManager boss){
-
+        bossTransform.position = Vector2.MoveTowards(bossTransform.position, playerTransform.position, bossSpeed);
     }
 
     public override void OnCollisionEnter(BossStateManager boss, Collision collision){
