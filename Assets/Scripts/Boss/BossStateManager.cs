@@ -13,6 +13,7 @@ public class BossStateManager : MonoBehaviour
     // quanto mais criamos, mais states adicionamos aqui
     public BossStateIdle IdleState = new BossStateIdle();
     public BossStateMover MoverState = new BossStateMover();
+    // Aqui em baixo, os novos states do boss, agora desmembrado em 2.
     public BossStatePrepAtaque PrepAtaqueState = new BossStatePrepAtaque();
     public BossStateAtaque AtaqueState = new BossStateAtaque();
     /*
@@ -47,9 +48,9 @@ public class BossStateManager : MonoBehaviour
         Debug.Log(currentState);
     }
     
-    //Estamos trazendo o OnCollisionEnter da Unity para cá, e lançando para nossos
+    //Estamos trazendo o OnTriggerEnter da Unity para cá, e lançando para nossos
     // states. Cada um deles tem um comportamento na colisão, apresentado na 
-    // função "public override void OnColissionEnter(BossStateManager boss)"
+    // função "public override void OnTriggerEnter(BossStateManager boss)"
     void OnTriggerEnter2D(Collider2D collider2D){
         currentState.OnTriggerEnter(this, collider2D);
     }
