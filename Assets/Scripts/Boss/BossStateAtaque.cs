@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossStateAtaque : BossBaseState
 {
     public override void EnterState(BossStateManager boss){
-
+        Debug.Log("Boss Atacando");
     }
 
     public override void UpdateState(BossStateManager boss){
