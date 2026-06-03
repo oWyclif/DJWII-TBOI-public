@@ -10,8 +10,6 @@ public class BossStatePrepAtaque : BossBaseState
     Vector3 targetScale = Vector3.one * 5.0f;
     float t = 0f;
 
-
-
     GameObject player; 
     Transform playerTransform;
     public override void EnterState(BossStateManager boss){
@@ -24,8 +22,6 @@ public class BossStatePrepAtaque : BossBaseState
         bossTransform = GameObject.Find("boss").GetComponent<Transform>();
 
         startScale = bossTransform.localScale;
-
-        //Ataque();
     }
 
     public override void UpdateState(BossStateManager boss){
