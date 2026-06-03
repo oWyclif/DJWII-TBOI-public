@@ -13,13 +13,13 @@ public class BossStateManager : MonoBehaviour
     // quanto mais criamos, mais states adicionamos aqui
     public BossStateIdle IdleState = new BossStateIdle();
     public BossStateMover MoverState = new BossStateMover();
+    public BossStatePrepAtaque PrepAtaqueState = new BossStatePrepAtaque();
     public BossStateAtaque AtaqueState = new BossStateAtaque();
-
     /*
     Se por um acaso do destino, meu boss agora tem um ataque forte, 
     eu colocaria aqui:
 
-    public BossStateAtaqueForte AtqForteState = new BossStateAtaqueForte();
+    public BossStatePrepAtaqueForte AtqForteState = new BossStatePrepAtaqueForte();
 
     Aí eu criaria o script de ataque forte como os outros states e voilá, consegui
     adicionar funcionalidade ao meu jogo em 5 minutos.
@@ -43,13 +43,20 @@ public class BossStateManager : MonoBehaviour
         // Aqui nós rodamos aquilo que está no "UpdateState" de nossos diferentes
         // states todo frame
         currentState.UpdateState(this);
+
+        Debug.Log(currentState);
     }
     
     //Estamos trazendo o OnCollisionEnter da Unity para cá, e lançando para nossos
     // states. Cada um deles tem um comportamento na colisão, apresentado na 
     // função "public override void OnColissionEnter(BossStateManager boss)"
-    void OnCollisionEnter(Collision collision){
-        currentState.OnCollisionEnter(this, collision);
+    void OnTriggerEnter2D(Collider2D collider2D){
+        currentState.OnTriggerEnter(this, collider2D);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     public void SwitchState(BossBaseState state){

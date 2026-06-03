@@ -5,14 +5,14 @@ using UnityEngine;
 public class BossStateMover : BossBaseState
 {
     Transform bossTransform;
-    float bossSpeed = 0.003f;
+    float bossMoverSpeed = 0.003f;
 
 
-    GameObject player; 
-    Transform playerTransform;
+    public GameObject player; 
+    public Transform playerTransform;
     
     public override void EnterState(BossStateManager boss){
-        Debug.Log("Boss Movendo");
+        //Debug.Log("Boss Movendo");
 
         player = GameObject.Find("player"); //Aqui encontramos o Objeto player
         playerTransform = player.GetComponent<Transform>(); // E definimos o playertransform,
@@ -22,10 +22,15 @@ public class BossStateMover : BossBaseState
     }
 
     public override void UpdateState(BossStateManager boss){
-        bossTransform.position = Vector2.MoveTowards(bossTransform.position, playerTransform.position, bossSpeed);
+        bossTransform.position = Vector2.MoveTowards(bossTransform.position, playerTransform.position, bossMoverSpeed);
     }
 
     public override void OnCollisionEnter(BossStateManager boss, Collision collision){
+         
+    }
 
+    public override void OnTriggerEnter(BossStateManager boss, Collider2D collider){
+        Debug.Log("Vai atacar");
+        boss.SwitchState(boss.PrepAtaqueState);
     }
 }

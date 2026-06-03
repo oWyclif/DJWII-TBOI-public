@@ -7,7 +7,7 @@ public class BossStateIdle : BossBaseState
 
 
     public override void EnterState(BossStateManager boss){
-        Debug.Log("Boss inicializado");
+        //Debug.Log("Boss inicializado");
 
         // Ao inicializar o state idle eu já lanço o método de escolher o próximo
         // state. Eu poderia esperar, se quissesse.
@@ -20,21 +20,29 @@ public class BossStateIdle : BossBaseState
     public override void OnCollisionEnter(BossStateManager boss, Collision collision){
 
     }
+    
+    public override void OnTriggerEnter(BossStateManager boss, Collider2D collider){
+        
+    }
+
 
     void Escolher(BossStateManager boss)
     {
         //Aqui eu defino uma variável int i e assinalo ela aleatoriamente 
         int i;
         i = Random.Range(1, 10);
-
+        
+        boss.SwitchState(boss.MoverState);
+        /*
         if (i < 7) // Depois transformar esse 7 numa variável
         {
             boss.SwitchState(boss.MoverState);
         }
         else
         {
-            boss.SwitchState(boss.AtaqueState);
+            boss.SwitchState(boss.PrepAtaqueState);
         }
+        */
     }
 
 }

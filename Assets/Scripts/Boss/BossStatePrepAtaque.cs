@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossStateAtaque : BossBaseState
+public class BossStatePrepAtaque : BossBaseState
 {
     Transform bossTransform;
 
-    float bossAtaqueSpeed = 0.08f;
+    Vector3 startScale;
+    Vector3 targetScale = Vector3.one * 5.0f;
+    float t = 0f;
+
 
 
     GameObject player; 
     Transform playerTransform;
     public override void EnterState(BossStateManager boss){
-        //Debug.Log("Boss Atacando");
+        //Debug.Log("Boss Preparando Ataque");
 
         player = GameObject.Find("player"); //Aqui encontramos o Objeto player
         playerTransform = player.GetComponent<Transform>(); // E definimos o playertransform,
@@ -20,26 +23,29 @@ public class BossStateAtaque : BossBaseState
 
         bossTransform = GameObject.Find("boss").GetComponent<Transform>();
 
-        bossTransform.localScale = new Vector3(3, 3, 1);
+        startScale = bossTransform.localScale;
 
         //Ataque();
     }
 
     public override void UpdateState(BossStateManager boss){
-        bossTransform.position = Vector2.MoveTowards(bossTransform.position, playerTransform.position, bossAtaqueSpeed);
-    
-        if (bossTransform.position.x == playerTransform.position.x && 
-            bossTransform.position.y == playerTransform.position.y)
+        t += Time.deltaTime / 1f;
+
+        Vector3 newScale = Vector3.Lerp(startScale, targetScale, t);
+        bossTransform.localScale = newScale;
+
+        if (bossTransform.localScale.x == 5f)
         {
-            boss.SwitchState(boss.IdleState);
+            boss.SwitchState(boss.AtaqueState);
+            t = 0;
         }
     }
 
     public override void OnCollisionEnter(BossStateManager boss, Collision collision){
-        boss.SwitchState(boss.IdleState);
+
     }
     public override void OnTriggerEnter(BossStateManager boss, Collider2D collider){
-        boss.SwitchState(boss.IdleState);        
+        
     }
 
 }
